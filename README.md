@@ -25,7 +25,7 @@ Plugin de **OpenCode Go** para **CLI PROXY API CONSOLE (CPAMC)** y el ecosistema
 
 - **Modo Nativo Directo**: Conexión limpia y ligera en CLI PROXY API CONSOLE (CPAMC) y Gentle-Shell para una cuenta individual.
 - **Modo Pool de Trabajo Continuo**: Compatible al 100% con **CPAMC Auto Switcher Pro** para crear grupos de cuentas con rotación automática, conmutación por error (failover ante 429/401) y operación ininterrumpida 24/7.
-- 💡 **Multi-Cuenta**: También si tienes dos o más cuentas, dispones de **Rotación Continua con Auto Switcher Pro** para distribuir el consumo y evitar agotamiento de cuotas.
+- 💡 **Multi-Cuenta**: También si tienes dos o más cuentas complementa con el plugin Auto Switcher Pro, así podrás tener una Rotación Continua, distribuir el consumo y evitar agotamiento de cuotas.
 
 ---
 
