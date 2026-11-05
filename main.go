@@ -38,7 +38,8 @@ var logMu sync.Mutex
 func logToFile(msg string) {
 	logMu.Lock()
 	defer logMu.Unlock()
-	f, err := os.OpenFile("/tmp/opencode_plugin_cpamc.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+	logPath := filepath.Join(os.TempDir(), "opencode_plugin_cpamc.log")
+	f, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 	if err == nil {
 		defer f.Close()
 		timestamp := time.Now().Format("2006-01-02 15:04:05")
