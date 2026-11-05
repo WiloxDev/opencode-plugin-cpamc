@@ -1,50 +1,93 @@
 <p align="center">
-  <img src="assets/logo.png" alt="OpenCode Go Plugin for CPAMC" width="220" />
+  <img src="assets/logo.png" alt="OpenCode Plugin for CPAMC" width="220" />
 </p>
 
-# 🟢 OpenCode Go Plugin for CLI PROXY API CONSOLE (CPAMC)
+# 🌐 OpenCode Go Plugin for CLI PROXY API CONSOLE (CPAMC)
 
-[![Ecosistema](https://img.shields.io/badge/Ecosistema-CPAMC%20%7C%20Gentle--Shell%20%7C%20Auto--Switcher--Pro-purple?style=flat-square)](#)
-[![Release](https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square)](https://github.com/WiloxDev/opencode-plugin-cpamc/releases)
-[![Licencia](https://img.shields.io/badge/Licencia-MIT-green?style=flat-square)](LICENSE)
+[![Gentle Hub](https://img.shields.io/badge/Gentle%20Hub-Plugin-F095C8?style=for-the-badge)](https://gentlemanprogramming.com/gentle-hub/)
+[![Ecosistema](https://img.shields.io/badge/Ecosistema-CPAMC%20%7C%20Gentle--Shell-blue?style=for-the-badge)](#)
+[![Discord](https://img.shields.io/badge/Discord-Apoyo-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://bit.ly/48zTJUo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
-Plugin de **OpenCode Go** para **CLI PROXY API CONSOLE (CPAMC)** y el ecosistema **Gentle-Shell**, con soporte nativo para pools de trabajo continuo en **CPAMC Auto Switcher Pro**.
+Plugin oficial en Go (C-ABI) que conecta los endpoints y modelos optimizados de la plataforma **OpenCode** dentro de **CLI PROXY API CONSOLE (CPAMC)** y **Gentle-Shell**.
 
----
+Permite acceder a modelos de codificación de baja latencia con soporte completo para pools de rotación multi-cuenta en **CPAMC Auto Switcher Pro**.
 
-## 🌟 Modelos Soportados
-
-- DeepSeek V4 Flash / Vision / Pro / 4.1 Flash
-- GLM 5.2 / GLM 5.3 / GLM 5.3 Flash
-- Grok 4.6 / Grok 4.7
-- GPT 5.6 Luna / GPT 6 Luna
-- Kimi K2.7 Code / Kimi K3
-- MiMo V2.5 / MiMo V2.6 Flash / MiMo Pro
-- MiniMax M2.7 / MiniMax M3
-- Qwen 3.8 Flash / Qwen 3 Pro
+> 💬 **Comunidad y Soporte Oficial:** `wilox2` · [Servidor de Discord](https://bit.ly/48zTJUo)
 
 ---
 
-## 🔄 Integración Dual: Standalone & Pools con Auto Switcher Pro
+## 🌟 Modelos y Características
 
-- **Modo Nativo Directo**: Conexión limpia y ligera en CLI PROXY API CONSOLE (CPAMC) y Gentle-Shell para una cuenta individual.
-- **Modo Pool de Trabajo Continuo**: Compatible al 100% con **CPAMC Auto Switcher Pro** para crear grupos de cuentas con rotación automática, conmutación por error (failover ante 429/401) y operación ininterrumpida 24/7.
-- 💡 **Multi-Cuenta**: También si tienes dos o más cuentas complementa con el plugin Auto Switcher Pro, así podrás tener una Rotación Continua, distribuir el consumo y evitar agotamiento de cuotas.
+- Integración directa con los endpoints de inferencia de OpenCode.
+- Mapeo de respuestas en streaming compatible con OpenAI responses API.
+- Baja sobrecarga de memoria gracias a su compilación nativa en CGO.
 
 ---
 
-## 🛠️ Compilación e Instalación
+## 🛠️ Métodos de Instalación
 
-Para compilar e instalar directamente en el directorio de plugins de CPAMC:
-
+### Método 1: Compilación local con Go
+Requiere Go (>= 1.22) y compilador C:
 ```bash
+git clone https://github.com/WiloxDev/opencode-plugin-cpamc.git
+cd opencode-plugin-cpamc
 make install
 ```
+El archivo `opencode-plugin-linux-amd64.so` se copiará automáticamente en la carpeta de plugins de CPAMC.
 
-O compilar manualmente la biblioteca compartida C-ABI (`.so`):
+---
 
-```bash
-make build
+### Método 2: Despliegue en Docker
+Monta el archivo `.so` en el contenedor de CPAMC:
+```yaml
+services:
+  cpamc:
+    image: ghcr.io/router-for-me/cliproxyapi:latest
+    volumes:
+      - ./plugins/opencode-plugin-linux-amd64.so:/app/plugins/opencode.so:ro
+      - ./config.yaml:/app/config.yaml:ro
+    ports:
+      - "8317:8317"
 ```
 
-El binario resultante se ubicará en `~/services/cliproxy/plugins/opencode-plugin-linux-amd64.so`.
+---
+
+## ⚙️ Configuración en CPAMC
+
+### En la Consola Web Oficial
+1. Abre: 👉 **[http://127.0.0.1:8317/management.html](http://127.0.0.1:8317/management.html)**
+2. Ve a **Plugins / OpenCode**.
+3. Pega tu API Key / Token de OpenCode.
+
+### En `config.yaml`
+```yaml
+plugins:
+  opencode:
+    enabled: true
+    api_key: "tu-api-key-de-opencode"
+    base_url: "https://api.opencode.dev/v1"
+```
+
+---
+
+## 🚀 Uso en Gentle Shell
+
+1. Sincroniza los modelos con `/cpamc refresh`.
+2. Escribe `/model` y selecciona tu modelo bajo el prefijo `cpamc/opencode-*`.
+3. Complementa con **[CPAMC Auto Switcher Pro](https://github.com/WiloxDev/cpamc-auto-switcher-pro)** si dispones de múltiples cuentas para balancear el consumo de cuota automáticamente.
+
+---
+
+## 🌐 Ecosistema de la Suite WiloxDev para Gentle Hub
+
+- 🌉 **[bridge-cpamc-oficial](https://github.com/WiloxDev/bridge-cpamc-oficial)** — Puente e instalador oficial multiplataforma de CPAMC.
+- ⚡ **[cpamc-auto-switcher-pro](https://github.com/WiloxDev/cpamc-auto-switcher-pro)** — Balanceador de carga y conmutación automática anti-429.
+- 🐋 **[deepseek-plugin-cpamc](https://github.com/WiloxDev/deepseek-plugin-cpamc)** — Plugin oficial de DeepSeek V3 y R1.
+- 👁️ **[gentle-context-lens](https://github.com/WiloxDev/gentle-context-lens)** — Cabina de contexto, semáforo de tokens y poda quirúrgica.
+
+---
+
+## 📄 Licencia
+
+MIT © Wilox. Desarrollado para la comunidad de Gentle Shell y CLIProxyAPI.
