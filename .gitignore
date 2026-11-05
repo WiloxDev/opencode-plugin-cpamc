@@ -1,3 +1,4 @@
 *.so
 *.h.tmp*
 *.so.tmp*
+*-linux-amd64.h
